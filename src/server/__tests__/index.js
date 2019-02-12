@@ -1,7 +1,11 @@
+/**
+ * @jest-environment node
+ */
+
 import { handleListen, app } from '../server';
 import request from 'supertest';
 
-test('should call log with app', () => {
+it('should call log with app', () => {
   const PORT = 3001;
   const log = jest.fn();
   handleListen(log, PORT);
@@ -11,7 +15,7 @@ test('should call log with app', () => {
   );
 });
 
-test('should pass integration tests', done => {
+it('should pass integration tests', done => {
   request(app)
     .get('/')
     .expect(200, 'Hello World!')
