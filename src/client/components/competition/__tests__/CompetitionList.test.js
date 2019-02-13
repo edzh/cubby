@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import { findByTestAttr } from 'client/utils';
 
@@ -10,7 +9,7 @@ const setUp = (props = {}) => {
   return component;
 };
 
-describe('Competition Component', () => {
+describe('CompetitionList Component', () => {
   let component;
 
   beforeEach(() => {

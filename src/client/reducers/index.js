@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import success from './successReducer';
+import cubby from './competitionReducer';
 
 export default combineReducers({
-  success
+  cubby
 });

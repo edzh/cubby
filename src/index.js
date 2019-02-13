@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './client/App';
 import { Provider } from 'react-redux';
-import { store } from './createStore';
+import { store } from './client/store';
+
+store.subscribe(() => console.log(store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>

@@ -39,10 +39,12 @@ const CompetitionForm = props => {
   }
 
   return (
-    <form onSubmit={onCompetitionSubmit}>
-      <input value={name} onChange={handleNameChange} />
-      <input value={date} onChange={handleDateChange} />
-      <button type="submit">Submit</button>
+    <form data-test="competitionForm" onSubmit={onCompetitionSubmit}>
+      <input data-test="formName" value={name} onChange={handleNameChange} />
+      <input data-test="formDate" value={date} onChange={handleDateChange} />
+      <button data-test="formSubmit" type="submit">
+        Submit
+      </button>
     </form>
   );
 };

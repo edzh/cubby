@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 
-import CompetitionForm from './components/competition/CompetitionForm';
-import CompetitionList from './components/competition/CompetitionList';
+import CompetitionContainer from './containers/CompetitionContainer';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <CompetitionForm />
-        <CompetitionList />
+        <CompetitionContainer />
       </div>
     );
   }
