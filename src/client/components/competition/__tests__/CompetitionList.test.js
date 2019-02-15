@@ -1,11 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { findByTestAttr } from 'client/utils';
+import { render, getByTestId } from 'react-testing-library';
 
 import CompetitionList from '../CompetitionList';
 
-const setUp = (props = {}) => {
-  const component = shallow(<CompetitionList {...props} />);
+const setUp = (
+  props = {
+    isFetching: false,
+    competitions: [],
+    fetchCompetitions: jest.fn(() => {
+      competitions: ['new comp'];
+    })
+  }
+) => {
+  const component = render(<CompetitionList {...props} />);
   return component;
 };
 
@@ -17,7 +24,7 @@ describe('CompetitionList Component', () => {
   });
 
   it('renders without crashing', () => {
-    const wrapper = findByTestAttr(component, 'competitionList');
-    expect(wrapper.length).toBe(1);
+    const wrapper = component.getByTestId('competitionList');
+    expect(wrapper).toBeTruthy();
   });
 });

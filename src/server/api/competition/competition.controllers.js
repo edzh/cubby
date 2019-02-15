@@ -40,3 +40,20 @@ export const createOne = async (req, res) => {
     res.status(400).end();
   }
 };
+
+export const removeOne = async (req, res) => {
+  try {
+    const removed = await Competition.findOneAndRemove({
+      _id: req.params.id
+    });
+
+    if (!removed) {
+      return res.status(400).end();
+    }
+
+    return res.status(200).json({ data: removed });
+  } catch (e) {
+    console.error(e);
+    res.status(400).end();
+  }
+};

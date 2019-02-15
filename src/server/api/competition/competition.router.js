@@ -1,5 +1,10 @@
 import { Router } from 'express';
-import { createOne, getOne, getMany } from './competition.controllers';
+import {
+  createOne,
+  getOne,
+  getMany,
+  removeOne
+} from './competition.controllers';
 
 const router = Router();
 
@@ -8,6 +13,9 @@ router
   .get(getMany)
   .post(createOne);
 
-router.route('/:id').get(getOne);
+router
+  .route('/:id')
+  .get(getOne)
+  .delete(removeOne);
 
 export default router;

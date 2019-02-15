@@ -1,25 +1,37 @@
-import fetch from 'cross-fetch';
+import 'cross-fetch';
 
-import { REQUEST_COMPETITIONS, RECEIVE_COMPETITIONS } from './competitionTypes';
+import {
+  FETCH_COMPETITIONS_REQUEST,
+  FETCH_COMPETITIONS_SUCCESS,
+  FETCH_COMPETITIONS_FAILURE
+} from './competitionTypes';
 
-export function requestCompetitions() {
+export function fetchCompetitionsRequest() {
   return {
-    type: REQUEST_COMPETITIONS
+    type: FETCH_COMPETITIONS_REQUEST
   };
 }
 
-export function receiveCompetitions(competitions) {
+export function fetchCompetitionsSuccess(competitions) {
   return {
-    type: RECEIVE_COMPETITIONS,
+    type: FETCH_COMPETITIONS_SUCCESS,
     competitions
+  };
+}
+
+export function fetchCompetitionsFailure(error) {
+  return {
+    type: FETCH_COMPETITIONS_FAILURE,
+    error
   };
 }
 
 export function fetchCompetitions() {
   return dispatch => {
-    dispatch(requestCompetitions);
-    return fetch('http://localhost:3001/api/competition')
+    dispatch(fetchCompetitionsRequest());
+    return fetch('/api/competition')
       .then(response => response.json())
-      .then(json => dispatch(receiveCompetitions(json.data)));
+      .then(json => dispatch(fetchCompetitionsSuccess(json.data)))
+      .catch(error => dispatch(fetchCompetitionsFailure('Failed to fetch')));
   };
 }

@@ -1,19 +1,28 @@
 import React, { useEffect } from 'react';
-
-import CompetitionList from '../../containers/CompetitionListContainer';
-import CompetitionForm from 'client/components/competition/CompetitionForm';
+import { Link } from 'react-router-dom';
 
 export default function Competition(props) {
-  props.fetchCompetitions();
+  // props.fetchCompetitions();
 
-  if (props.isFetching) {
-    return null;
+  function deleteCompetition(id) {
+    fetch(`/api/competition/${id}`, {
+      method: 'DELETE'
+    })
+      .then(response => response.json())
+      .then(response => console.log(JSON.stringify(response)))
+      .catch(error => console.error(error));
   }
 
+  const { competition } = props;
+
   return (
-    <div data-test="competition">
-      <CompetitionList />
-      <CompetitionForm />
+    <div data-testid="competition">
+      <Link to={`/competition/${competition._id}`}>
+        <p>
+          {competition.name}{' '}
+          <span onClick={() => deleteCompetition(competition._id)}>x</span>
+        </p>
+      </Link>
     </div>
   );
 }
