@@ -6,9 +6,9 @@ const CompetitionPage = props => {
   }, []);
 
   return (
-    <div>
-      <h1>{props.name}</h1>
-      <h2>{props.date}</h2>
+    <div data-testid="competitionPage">
+      <h1 data-testid="name">{props.name}</h1>
+      <h2 data-testid="date">{props.date}</h2>
     </div>
   );
 };

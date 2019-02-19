@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router';
 
 const CompetitionForm = props => {
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
+  const [toCompetition, setToCompetition] = useState(false);
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -29,13 +31,20 @@ const CompetitionForm = props => {
       body: JSON.stringify({ name, date })
     })
       .then(response => response.json())
-      .then(response => console.log('Success:', JSON.stringify(response)))
+      .then(response => {
+        console.log('Success:', JSON.stringify(response));
+        setToCompetition(true);
+      })
       .catch(error => console.error(error));
   }
 
   function clearInput() {
     setName('');
     setDate('');
+  }
+
+  if (toCompetition === true) {
+    return <Redirect to="/competition" />;
   }
 
   return (

@@ -56,4 +56,8 @@ describe('CompetitionForm Component', () => {
     expect(nameInput.value).toBe('');
     expect(dateInput.value).toBe('');
   });
+
+  // it('returns body from post request', async () => {
+  //   fetchMock.post('/api/competition', {status})
+  // })
 });

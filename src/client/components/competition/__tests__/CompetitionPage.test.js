@@ -5,13 +5,20 @@ import CompetitionPage from '../CompetitionPage';
 
 const setUp = (props = {}) => {
   const component = render(<CompetitionPage {...props} />);
+  return component;
 };
 
 describe('CompetitionPage Component', () => {
+  const props = {
+    fetchCompetition: jest.fn(),
+    name: 'test competition',
+    date: '2020'
+  };
+
   let component;
 
   beforeEach(() => {
-    component = setUp();
+    component = setUp(props);
   });
 
   it('renders without crashing', () => {

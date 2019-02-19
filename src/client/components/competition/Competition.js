@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Competition(props) {
-  // props.fetchCompetitions();
-
   function deleteCompetition(id) {
     fetch(`/api/competition/${id}`, {
       method: 'DELETE'
@@ -16,13 +14,14 @@ export default function Competition(props) {
   const { competition } = props;
 
   return (
-    <div data-testid="competition">
-      <Link to={`/competition/${competition._id}`}>
-        <p>
-          {competition.name}{' '}
-          <span onClick={() => deleteCompetition(competition._id)}>x</span>
-        </p>
-      </Link>
-    </div>
+    <tr data-testid="competition">
+      <td>
+        <Link to={`/competition/id/${competition._id}`}>
+          {competition.name}
+        </Link>
+      </td>
+      <td>{competition.date}</td>
+      <td onClick={() => deleteCompetition(competition._id)}>x</td>
+    </tr>
   );
 }

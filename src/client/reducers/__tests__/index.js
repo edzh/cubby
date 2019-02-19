@@ -13,17 +13,16 @@ describe('competitions reducer', () => {
     expect(reducer({}, { type: types.FETCH_COMPETITIONS_REQUEST })).toEqual({
       isFetching: true
     });
-
-    expect(
-      reducer(
-        {},
-        {
-          type: types.FETCH_COMPETITIONS_SUCCESS,
-          competitions: ['test competition']
-        }
-      )
-    ).toEqual({
-      competitions: ['test competition'],
+    const competitions = [
+      { name: 'Test Competition', date: '2020' },
+      { name: 'Test Competition 2', date: '2021' }
+    ];
+    const newState = reducer(undefined, {
+      type: types.FETCH_COMPETITIONS_SUCCESS,
+      competitions
+    });
+    expect(newState).toEqual({
+      competitions: competitions,
       isFetching: false
     });
 
