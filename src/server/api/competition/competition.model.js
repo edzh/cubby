@@ -13,6 +13,9 @@ const competitionSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true
+  },
+  address: {
+    type: String
   }
 });
 

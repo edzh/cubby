@@ -1,34 +1,26 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router';
+import PlacesAutocomplete from './PlacesAutocomplete';
 
-const CompetitionForm = props => {
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
+export default function CompetitionForm(props) {
+  const name = useFormInput('');
+  const date = useFormInput('');
+  const [address, setAddress] = useState('');
   const [toCompetition, setToCompetition] = useState(false);
-
-  function handleNameChange(e) {
-    setName(e.target.value);
-  }
-
-  function handleDateChange(e) {
-    setDate(e.target.value);
-  }
 
   function onCompetitionSubmit(e) {
     e.preventDefault();
 
-    postCompetition(name, date);
-
-    clearInput();
+    postCompetition(name.value, date.value, address);
   }
 
-  function postCompetition(name, date) {
+  function postCompetition(name, date, address) {
     fetch('/api/competition', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name, date })
+      body: JSON.stringify({ name, date, address })
     })
       .then(response => response.json())
       .then(response => {
@@ -38,24 +30,31 @@ const CompetitionForm = props => {
       .catch(error => console.error(error));
   }
 
-  function clearInput() {
-    setName('');
-    setDate('');
-  }
-
   if (toCompetition === true) {
     return <Redirect to="/competition" />;
   }
 
   return (
     <form data-testid="competitionForm" onSubmit={onCompetitionSubmit}>
-      <input data-testid="formName" value={name} onChange={handleNameChange} />
-      <input data-testid="formDate" value={date} onChange={handleDateChange} />
+      <input data-testid="formName" {...name} />
+      <input data-testid="formDate" type="date" {...date} />
+      <PlacesAutocomplete setAddress={setAddress} />
       <button data-testid="formSubmit" type="submit">
         Submit
       </button>
     </form>
   );
-};
+}
 
-export default CompetitionForm;
+function useFormInput(initialValue) {
+  const [value, setValue] = useState(initialValue);
+
+  function handleChange(e) {
+    setValue(e.target.value);
+  }
+
+  return {
+    value,
+    onChange: handleChange
+  };
+}
