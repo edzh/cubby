@@ -3,11 +3,13 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Landing from './components/landing/Landing';
 
-import Navbar from './components/navbar/Navbar';
+import Navbar from './containers/NavbarContainer';
 
 import CompetitionListContainer from './containers/CompetitionListContainer';
 import CompetitionForm from './components/competition/CompetitionForm';
 import CompetitionPageContainer from './containers/CompetitionPageContainer';
+import SignInContainer from './containers/SignInContainer';
+import SignUpContainer from './containers/SignUpContainer';
 
 class App extends Component {
   render() {
@@ -41,6 +43,8 @@ class App extends Component {
               <CompetitionPageContainer competitionId={match.params.id} />
             )}
           />
+          <Route exact path={'/signin'} render={() => <SignInContainer />} />
+          <Route exact path={'/signup'} render={() => <SignUpContainer />} />
         </div>
       </BrowserRouter>
     );

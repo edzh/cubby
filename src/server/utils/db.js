@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import options from '../config';
 
-const dbUrl = 'mongodb://edzh:password1@ds221155.mlab.com:21155/cubby';
+const dbUrl = options.dbUrl;
 
 export const connect = (url = dbUrl) => {
   return mongoose.connect(url, { useNewUrlParser: true });

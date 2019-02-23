@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { protect } from '../../utils/auth';
 import {
   createOne,
   getOne,
@@ -11,7 +12,7 @@ const router = Router();
 router
   .route('/')
   .get(getMany)
-  .post(createOne);
+  .post(protect, createOne);
 
 router
   .route('/:id')
