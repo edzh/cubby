@@ -20,6 +20,7 @@ export default function competitionPage(state = initialState, action) {
         name: action.name,
         date: action.date,
         address: action.address,
+        id: action.id,
         isFetching: false
       };
 

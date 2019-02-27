@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import CompetitionPageNavContainer from '../../containers/CompetitionPageNavContainer';
 import GMap from '../map/GMap';
 
 const CompetitionPage = props => {
@@ -7,12 +9,34 @@ const CompetitionPage = props => {
   }, []);
 
   return (
-    <div data-testid="competitionPage">
-      <h1 data-testid="name">{props.name}</h1>
-      <h2 data-testid="date">{props.date}</h2>
-      <h2 data-testid="address">{props.address}</h2>
-      <GMap />
-    </div>
+    <BrowserRouter>
+      <div data-testid="competitionPage">
+        <CompetitionPageNavContainer />
+        <Route
+          exact
+          path={'/competition/id/:id'}
+          render={() => (
+            <div>
+              <h1 data-testid="name">{props.name}</h1>
+              <h2 data-testid="date">{props.date}</h2>
+              <h2 data-testid="address">{props.address}</h2>
+            </div>
+          )}
+        />
+        <Route
+          path={'/competition/id/:id/map'}
+          render={() => (
+            <div>
+              <GMap />
+            </div>
+          )}
+        />
+        <Route
+          path={'/competition/id/:id/events'}
+          render={() => <div>Events Page</div>}
+        />
+      </div>
+    </BrowserRouter>
   );
 };
 

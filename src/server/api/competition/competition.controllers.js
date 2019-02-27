@@ -31,9 +31,8 @@ export const getMany = async (req, res) => {
 };
 
 export const createOne = async (req, res) => {
-  const createdBy = '5c5b3362b2fa045989440f73';
   try {
-    const competition = await Competition.create({ ...req.body, createdBy });
+    const competition = await Competition.create({ ...req.body });
     res.status(201).json({ data: competition });
   } catch (e) {
     console.error(e);

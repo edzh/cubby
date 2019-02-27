@@ -6,7 +6,7 @@ import Landing from './components/landing/Landing';
 import Navbar from './containers/NavbarContainer';
 
 import CompetitionListContainer from './containers/CompetitionListContainer';
-import CompetitionForm from './components/competition/CompetitionForm';
+import CompetitionFormContainer from './containers/CompetitionFormContainer';
 import CompetitionPageContainer from './containers/CompetitionPageContainer';
 import SignInContainer from './containers/SignInContainer';
 import SignUpContainer from './containers/SignUpContainer';
@@ -32,12 +32,11 @@ class App extends Component {
             path={'/competition/create'}
             render={() => (
               <div className="App">
-                <CompetitionForm />
+                <CompetitionFormContainer />
               </div>
             )}
           />
           <Route
-            exact
             path={'/competition/id/:id'}
             render={({ match }) => (
               <CompetitionPageContainer competitionId={match.params.id} />

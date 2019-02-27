@@ -65,6 +65,7 @@ export const protect = async (req, res, next) => {
   const bearer = req.headers.authorization;
 
   if (!bearer || !bearer.startsWith('Bearer ')) {
+    console.log('no bearer');
     return res.status(401).end();
   }
 
@@ -83,6 +84,7 @@ export const protect = async (req, res, next) => {
     .exec();
 
   if (!user) {
+    console.log('no user');
     return res.status(401).end();
   }
 

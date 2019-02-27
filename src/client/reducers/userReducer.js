@@ -1,7 +1,8 @@
 import * as types from '../actions/userTypes';
 
 const initialState = {
-  isAuthenticated: localStorage.getItem('id_token') ? true : false
+  isAuthenticated: localStorage.getItem('id_token') ? true : false,
+  isFetching: localStorage.getItem('id_token') ? true : false
 };
 
 export default function user(state = initialState, action) {
@@ -14,7 +15,7 @@ export default function user(state = initialState, action) {
     case types.SIGNIN_SUCCESS:
       return {
         ...state,
-        token: action.token,
+        data: action.data,
         isFetching: false,
         isAuthenticated: true
       };
@@ -34,7 +35,7 @@ export default function user(state = initialState, action) {
     case types.SIGNUP_SUCCESS:
       return {
         ...state,
-        token: action.token,
+        data: action.data,
         isFetching: false,
         isAuthenticated: true
       };
@@ -50,7 +51,7 @@ export default function user(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: false,
-        token: ''
+        data: {}
       };
     default:
       return state;

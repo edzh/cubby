@@ -18,9 +18,10 @@ export default function CompetitionForm(props) {
     fetch('/api/competition', {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${localStorage.getItem('id_token')}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name, date, address })
+      body: JSON.stringify({ createdBy: props.user._id, name, date, address })
     })
       .then(response => response.json())
       .then(response => {
@@ -38,7 +39,7 @@ export default function CompetitionForm(props) {
     <form data-testid="competitionForm" onSubmit={onCompetitionSubmit}>
       <input data-testid="formName" {...name} />
       <input data-testid="formDate" type="date" {...date} />
-      <PlacesAutocomplete setAddress={setAddress} />
+      <PlacesAutocomplete data-testid="formAddress" setAddress={setAddress} />
       <button data-testid="formSubmit" type="submit">
         Submit
       </button>

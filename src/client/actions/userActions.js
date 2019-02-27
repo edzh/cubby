@@ -8,10 +8,10 @@ export function signInRequest() {
   };
 }
 
-export function signInSuccess(token) {
+export function signInSuccess(data) {
   return {
     type: types.SIGNIN_SUCCESS,
-    token
+    data
   };
 }
 
@@ -34,7 +34,7 @@ export function signIn(email, password) {
     })
       .then(response => response.json())
       .then(response => {
-        dispatch(signInSuccess(response.token));
+        dispatch(fetchUserInfo(signInSuccess, signInFailure, response.token));
         localStorage.setItem('id_token', response.token);
       })
       .catch(error => dispatch(signInFailure(error)));
@@ -47,10 +47,10 @@ export function signUpRequest() {
   };
 }
 
-export function signUpSuccess(token) {
+export function signUpSuccess(data) {
   return {
     type: types.SIGNUP_SUCCESS,
-    token
+    data
   };
 }
 
@@ -73,7 +73,7 @@ export function signUp(email, password) {
     })
       .then(response => response.json())
       .then(response => {
-        dispatch(signUpSuccess(response.token));
+        dispatch(fetchUserInfo(signUpSuccess, signUpFailure, response.token));
         localStorage.setItem('id_token', response.token);
       })
       .catch(error => dispatch(signUpFailure(error)));
@@ -90,5 +90,18 @@ export function signOut() {
 export function signOutRequest() {
   return {
     type: types.SIGNOUT_REQUEST
+  };
+}
+
+export function fetchUserInfo(success, failure, token) {
+  return dispatch => {
+    fetch('/api/user', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(response => response.json())
+      .then(response => dispatch(success(response.data)))
+      .catch(error => dispatch(failure(error)));
   };
 }
