@@ -51,6 +51,7 @@ export default function EventForm(props) {
         <option value="multiblind">3x3x3 Multi-Blind</option>
       </select>
       <select {...round}>
+        <option>---</option>
         <option value="Round 1">Round 1</option>
         <option value="Round 2">Round 2</option>
         <option value="Final">Final</option>
