@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const eventSchema = new mongoose.Schema({
-  eventOf: {
+  competitionId: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'competition',
     required: true

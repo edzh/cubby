@@ -2,7 +2,7 @@ import { Event } from './event.model';
 
 export const getMany = async (req, res) => {
   try {
-    const events = await Event.find({})
+    const events = await Event.find(req.query)
       .lean()
       .exec();
 

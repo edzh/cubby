@@ -19,7 +19,7 @@ export default function EventForm(props) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        eventOf: props.competitionId,
+        competitionId: props.competitionId,
         name,
         round,
         beginTime,
