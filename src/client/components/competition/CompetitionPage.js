@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import CompetitionPageNavContainer from '../../containers/CompetitionPageNavContainer';
+
+import EventPage from '../event/EventPage';
 import GMap from '../map/GMap';
 
 const CompetitionPage = props => {
@@ -33,7 +35,7 @@ const CompetitionPage = props => {
         />
         <Route
           path={'/competition/id/:id/events'}
-          render={() => <div>Events Page</div>}
+          render={() => <EventPage />}
         />
       </div>
     </BrowserRouter>

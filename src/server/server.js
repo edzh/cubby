@@ -6,6 +6,7 @@ import { signup, signin, protect } from './utils/auth';
 
 import userRouter from './api/user/user.router';
 import competitionRouter from './api/competition/competition.router';
+import eventRouter from './api/event/event.router';
 
 import { connect } from './utils/db';
 
@@ -32,9 +33,10 @@ app.post('/api/signin', signin);
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
-// app.use('/api', protect);
+
 app.use('/api/user', protect, userRouter);
 app.use('/api/competition', competitionRouter);
+app.use('/api/event', eventRouter);
 
 export const start = async () => {
   try {
