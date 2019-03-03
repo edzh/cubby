@@ -8,6 +8,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     name: state.competition.name,
     date: state.competition.date,
+    address: state.competition.address,
     isFetching: state.competition.isFetching,
     id: ownProps.competitionId
   };

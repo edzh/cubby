@@ -16,7 +16,9 @@ export function fetchCompetitionSuccess(competition) {
   return {
     type: FETCH_COMPETITION_SUCCESS,
     name: competition.name,
-    date: competition.date
+    date: competition.date,
+    address: competition.address,
+    id: competition._id
   };
 }
 

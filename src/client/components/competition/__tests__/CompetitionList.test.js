@@ -14,6 +14,7 @@ const setUp = (
 ) => {
   const component = render(
     <Router>
+      /
       <CompetitionList {...props} />
     </Router>
   );
@@ -60,5 +61,15 @@ describe('CompetitionList Component', () => {
 
     expect(fetchCompetitions).toHaveBeenCalled();
     expect(component.getAllByTestId('competition')).toHaveLength(2);
+  });
+
+  it('renders async competitions', async () => {
+    render;
+
+    const competitions = [
+      { name: 'test comp 1', date: '2020' },
+      { name: 'test comp 2', date: '2021' }
+    ];
+    const fetchCompetitions = jest.fn(() => competitions);
   });
 });
